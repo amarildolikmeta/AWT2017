@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        </div>
+</div>
+<!-- ko if: active() === 'fullnamechangecontainer' -->
+    <!-- Change User Name -->
+    <c-fullnamechangecontainer params="context: context"></c-fullnamechangecontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'changepasswordcontainer' -->
+    <!-- Change UserPassword -->
+    <c-changepasswordcontainer params="context: context"></c-changepasswordcontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'userdetails' -->
+    <!-- UserDetails -->
+    <c-userdetails params="context: context"></c-userdetails>
+<!-- /ko -->

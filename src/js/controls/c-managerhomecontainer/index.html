@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+            <a class="col-xs-2 btn btn-default" data-bind="click: landmark.bind($data, 'campaignlistcontainer'), css: {active: active() === 'campaignlistcontainer'}">Campaign List</a>
+        </div>
+</div>
+<!-- ko if: active() === 'campaignlistcontainer' -->
+    <!-- Campaign List -->
+    <c-campaignlistcontainer params="context: context"></c-campaignlistcontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'createcampaignmodel' -->
+    <!-- Create Campaign -->
+    <c-createcampaignmodel params="context: context"></c-createcampaignmodel>
+<!-- /ko -->
+<!-- ko if: active() === 'runningcampaigncontainer' -->
+    <!-- Running campaign -->
+    <c-runningcampaigncontainer params="context: context"></c-runningcampaigncontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'completedcampaigndetails' -->
+    <!-- CompletedCampaign -->
+    <c-completedcampaigndetails params="context: context"></c-completedcampaigndetails>
+<!-- /ko -->
+<!-- ko if: active() === 'unpublishedcampaigndetails' -->
+    <!-- Unpublished Campaign Details -->
+    <c-unpublishedcampaigndetails params="context: context"></c-unpublishedcampaigndetails>
+<!-- /ko -->

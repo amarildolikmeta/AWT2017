@@ -1,0 +1,36 @@
+<h3>Modify Campaign</h3>
+<form>
+    <div class="form-group" >
+        <label for="modifycampaignform_field_0" data-bind="css: {active: name}" class="control-label">Name</label>
+        <input id="modifycampaignform_field_0" data-bind="textinput: name" type="text" class="form-control validate" aria-describedby="modifycampaignform_field_0_error">
+        <span id="modifycampaignform_field_0_error" class="help-block" data-bind="text: nameError"></span>
+    </div>
+     <div class="form-group" >
+        <label for="modifycampaignform_field_3" data-bind="css: {active: selectionReplica}" class="control-label">Minimum number of workers per image selection</label>
+        <input id="modifycampaignform_field_3" data-bind="value: selectionReplica" type="number" class="form-control validate" aria-describedby="modifycampaignform_field_3_error">
+        <span id="modifycampaignform_field_3_error" class="help-block" ></span>
+    </div>
+    <div class="form-group" >
+        <label for="modifycampaignform_field_4" data-bind="css: {active: threshold}" class="control-label">Threshold</label>
+        <input id="modifycampaignform_field_4" data-bind="value: threshold" type="number" class="form-control validate" aria-describedby="modifycampaignform_field_4_error">
+        <span id="modifycampaignform_field_4_error" class="help-block" ></span>
+    </div>
+    
+    <div class="form-group" >
+        <label for="modifycampaignform_field_1" data-bind="css: {active: annotationReplica}" class="control-label">Minimum number of worker  per image annotation</label>
+        <input id="modifycampaignform_field_1" data-bind="value: annotationReplica" type="number" class="form-control validate" aria-describedby="modifycampaignform_field_1_error">
+        <span id="modifycampaignform_field_1_error" class="help-block" ></span>
+    </div>
+    <div class="form-group" >
+        <label for="modifycampaignform_field_2" data-bind="css: {active: annotationSize}" class="control-label">Size of Annotation Line</label>
+        <input id="modifycampaignform_field_2" data-bind="value: annotationSize" type="number" class="form-control validate" aria-describedby="modifycampaignform_field_2_error">
+        <span id="modifycampaignform_field_2_error" class="help-block" ></span>
+    </div>
+   
+</form>
+<div class="form-group" data-bind="css: {'has-error': modifyError}">
+        <span id="createError" class="help-block" data-bind="text: modifyError"></span>
+    </div>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'modifyreadycampaignbutton')">Modify</a>
+</div>

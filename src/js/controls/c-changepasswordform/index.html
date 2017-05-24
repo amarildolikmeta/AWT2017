@@ -1,0 +1,20 @@
+<h3>Change Password</h3>
+<form>
+    <div class="form-group" data-bind="css: {'has-error': newPassError}">
+        <label for="changepasswordform_field_0" data-bind="css: {active: newPass}, attr: {'data-error': newPassError}" class="control-label">New Password</label>
+        <input id="changepasswordform_field_0" data-bind="textinput: newPass" type="password" class="form-control validate" aria-describedby="changepasswordform_field_0_error">
+        <span id="changepasswordform_field_0_error" class="help-block" data-bind="text: newPassError"></span>
+    </div>
+    <div class="form-group" data-bind="css: {'has-error': repeatPassError}">
+        <label for="changepasswordform_field_2" data-bind="css: {active: repeatPass}, attr: {'data-error': repeatPassError}" class="control-label">Repeat Password</label>
+        <input id="changepasswordform_field_2" data-bind="textinput: repeatPass" type="password" class="form-control validate" aria-describedby="changepasswordform_field_2_error">
+        <span id="changepasswordform_field_2_error" class="help-block" data-bind="text: repeatPassError"></span>
+    </div>
+</form>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'changepasswordformbutton')">Change Password</a>
+</div>
+<div class="form-group" data-bind="css: {'has-error': changeError}">
+        
+        <p id="changeError" style="color:red" class="help-block" data-bind="text: changeError"></p>
+    </div>

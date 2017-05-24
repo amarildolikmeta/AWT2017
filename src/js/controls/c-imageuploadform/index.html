@@ -1,0 +1,13 @@
+<h3>Upload Image</h3>
+<form>
+    <div class="form-group" data-bind="css: {'has-error': errors()['image']}">
+        <label for="imageuploadform_field_0" data-bind="css: {active: fields()['image']}, attr: {'data-error': errors()['image']}" class="control-label">Select Images</label>
+        <input id="imageuploadform_field_0" data-bind="event: { change: function() { uploadImage($element.files[0]) } }" type="file" accept=".jpg" class="form-control validate" aria-describedby="imageuploadform_field_0_error" multiple>
+        <span id="imageuploadform_field_0_error" class="help-block" data-bind="text: errors()['image']"></span>
+    </div>
+</form>
+<p data-bind="text:success" style="color:green"></p>
+<p data-bind="text:uploadError" style="color:red"></p>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'imageuploadbutton')">Upload</a>
+</div>

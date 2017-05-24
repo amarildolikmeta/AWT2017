@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        </div>
+</div>
+<!-- ko if: active() === 'campaignlistcontainerrunning' -->
+    <!-- Campaign Image List -->
+    <c-campaignlistcontainerrunning params="context: context"></c-campaignlistcontainerrunning>
+<!-- /ko -->
+<!-- ko if: active() === 'annotationscontainer' -->
+    <!-- Annotations -->
+    <c-annotationscontainer params="context: context"></c-annotationscontainer>
+<!-- /ko -->

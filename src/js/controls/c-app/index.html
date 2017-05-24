@@ -1,0 +1,9 @@
+<span>
+    <!-- App Container -->
+    <div class="row" data-bind="css: {'has-error': logOutError}">
+    <p id="modifyError" style="color:red" class="help-block" data-bind="text: logOutError"></p>
+    </div>
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data,'logoutbutton')">Log Out</a>
+    <c-appcontainer params="context: context"></c-appcontainer>
+    
+</span>

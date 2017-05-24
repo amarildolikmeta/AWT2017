@@ -1,0 +1,13 @@
+
+<h3>Image Details</h3>
+<dl class="dl-horizontal" data-bind="if: item">
+        <dt>NUMBER OF NEGATIVE SELECTIONS</dt>
+        <dd data-bind="text: item()['NUMBER OF NEGATIVE SELECTIONS']"></dd>
+        <dt>NUMBER OF POSITIVE SELECTIONS</dt>
+        <dd data-bind="text: item()['NUMBER OF POSITIVE SELECTIONS']"></dd>
+        <dt>id</dt>
+        <dd data-bind="text: item()['id']"></dd>
+</dl>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'deleteimagebutton')">Delete</a>
+</div>

@@ -1,0 +1,14 @@
+<h3>Change Name</h3>
+<form>
+    <div class="form-group" data-bind="css: {'has-error': errors()['Fullname']}">
+        <label for="changenameform_field_0" data-bind="css: {active: fields()['Fullname']}, attr: {'data-error': errors()['Fullname']}" class="control-label">Fullname</label>
+        <input id="changenameform_field_0" data-bind="textinput: fields()['Fullname']" type="text" class="form-control validate" aria-describedby="changenameform_field_0_error">
+        <span id="changenameform_field_0_error" class="help-block" data-bind="text: errors()['Fullname']"></span>
+    </div>
+</form>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'changenamebutton')">Change</a>
+</div>
+<div class="row" data-bind="css: {'has-error': modifyError}">
+    <p id="modifyError" class="help-block" data-bind="text: modifyError"></p>
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+            <a class="col-xs-2 btn btn-default" data-bind="click: landmark.bind($data, 'profilecontainer'), css: {active: active() === 'profilecontainer'}">Profile</a>
+        </div>
+</div>
+<!-- ko if: active() === 'homepagemanager' -->
+    <!-- Home -->
+    <c-homepagemanager params="context: context"></c-homepagemanager>
+<!-- /ko -->
+<!-- ko if: active() === 'profilecontainer' -->
+    <!-- Profile -->
+    <c-profilecontainer params="context: context"></c-profilecontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'workerhomecontainer' -->
+    <!-- Home -->
+    <c-workerhomecontainer params="context: context"></c-workerhomecontainer>
+<!-- /ko -->

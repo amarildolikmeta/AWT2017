@@ -1,0 +1,37 @@
+<h3>Create Campaign</h3>
+<form>
+    <div class="form-group" data-bind="css: {'has-error': nameError}">
+        <label for="createcampaignform_field_0" data-bind="css: {active: name}, attr: {'data-error': nameError}" class="control-label">Campaign Name</label>
+        <input id="createcampaignform_field_0" data-bind="textinput: name" type="text" class="form-control validate" aria-describedby="createcampaignform_field_0_error">
+        <span id="createcampaignform_field_0_error" class="help-block" data-bind="text: nameError"></span>
+    </div>
+    <h3>Selection tasks parameters</h3></br>
+    <div class="form-group" data-bind="css: {'has-error': selectionReplicaError">
+        <label for="createcampaignform_field_3" data-bind="css: {active: selectionReplica}, attr: {'data-error': selectionReplicaError}" class="control-label">Minimum number of workers per image selection</label>
+        <input id="createcampaignform_field_3" data-bind="textinput: selectionReplica" type="number" class="form-control validate" aria-describedby="createcampaignform_field_3_error">
+        <span id="createcampaignform_field_3_error" class="help-block" data-bind="text: selectionReplicaError"></span>
+    </div>
+    <div class="form-group" data-bind="css: {'has-error': thresholdError}">
+        <label for="createcampaignform_field_4" data-bind="css: {active: threshold}, attr: {'data-error': thresholdError}" class="control-label">Threshold</label>
+        <input id="createcampaignform_field_4" data-bind="textinput: threshold" type="number" class="form-control validate" aria-describedby="createcampaignform_field_4_error">
+        <span id="createcampaignform_field_4_error" class="help-block" data-bind="text: thresholdError"></span>
+    </div>
+    <h3>Annotation tasks parameters</h3></br>
+    <div class="form-group" data-bind="css: {'has-error': annotationReplicaError}">
+        <label for="createcampaignform_field_1" data-bind="css: {active: annotationReplica}, attr: {'data-error': annotationReplicaError}" class="control-label">Minimum number of worker  per image annotation</label>
+        <input id="createcampaignform_field_1" data-bind="value: annotationReplica" type="number" class="form-control validate" aria-describedby="createcampaignform_field_1_error">
+        <span id="createcampaignform_field_1_error" class="help-block" data-bind="text: annotationReplicaError"></span>
+    </div>
+    <div class="form-group" data-bind="css: {'has-error': annotationSizeError}">
+        <label for="createcampaignform_field_2" data-bind="css: {active: annotationSize}, attr: {'data-error': annotationSizeError}" class="control-label">Size of Annotation Line</label>
+        <input id="createcampaignform_field_2" data-bind="value: annotationSize" type="number" class="form-control validate" aria-describedby="createcampaignform_field_2_error">
+        <span id="createcampaignform_field_2_error" class="help-block" data-bind="text: annotationSizeError"></span>
+    </div>
+    
+</form>
+<div class="form-group" data-bind="css: {'has-error': createError}">
+        <span id="createError" class="help-block" data-bind="text: createError"></span>
+    </div>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'createcampaingbutton')">Create</a>
+</div>

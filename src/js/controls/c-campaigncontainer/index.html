@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+            <h3 data-bind="text:detailsError" style="color:red"></h3>
+            <a class="col-xs-2 btn btn-default" data-bind="click: landmark.bind($data, 'imageslistcontainer'), css: {active: active() === 'imageslistcontainer'}">Images</a>
+            <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'modifycampaignevent')">Modify Campaign</a>
+            <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'selectworkersevent')">Select Workers</a>
+            <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'Publish Campaign')">Publish</a>
+            <span data-bind="text:publishError" style="color:red"></span>
+    </div>
+
+</div>
+<!-- ko if: active() === 'modifycampaignformcontainer' -->
+    <!-- Modify Campaign -->
+    <c-modifycampaignformcontainer params="context: context"></c-modifycampaignformcontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'imageslistcontainer' -->
+    <!-- Images And Details -->
+    <c-imageslistcontainer params="context: context"></c-imageslistcontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'imageuploadcontainer' -->
+    <!-- Image Upload -->
+    <c-imageuploadcontainer params="context: context"></c-imageuploadcontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'selectworkerscontainer' -->
+    <!-- Select Campaign Workers -->
+    <c-selectworkerscontainer params="context: context"></c-selectworkerscontainer>
+<!-- /ko -->
+    

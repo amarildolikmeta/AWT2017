@@ -1,0 +1,9 @@
+<h3>Select The Image</h3>
+<dl class="dl-horizontal" data-bind="if: item">
+        <dt>selection</dt>
+        <dd data-bind="text: item()['selection']"></dd>
+</dl>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'acceptimagebutton')">Accept</a>
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'rejectimagebutton')">Reject</a>
+</div>

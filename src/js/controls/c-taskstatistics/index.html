@@ -1,0 +1,14 @@
+<h3>Task Statistics</h3>
+<div  data-bind="if: item" width="100%">
+        <p>NUMBER OF AVAILABLE IMAGES: <span data-bind="text: item()['available']"></span></p>
+        
+        <div data-bind="if: item()['accepted']">
+        <p>NUMBER OF ACCEPTED IMAGES:<span data-bind="text: item()['accepted']"></span></p>
+        <p>NUMBER OF REJECTED IMAGES: <span data-bind="text: item()['rejected']"></span></p>
+        
+        </div>
+        <div data-bind="if: item()['annotated']">
+        <p>NUMBER OF ANNOTATED IMAGES:<span data-bind="text: item()['annotated']"></span></p>
+        </div>
+        
+</dl>

@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+            <a class="col-xs-2 btn btn-default" data-bind="click: landmark.bind($data, 'usertaskscontainer'), css: {active: active() === 'usertaskscontainer'}">User Tasks</a>
+        </div>
+</div>
+<!-- ko if: active() === 'selectiontaskview' -->
+    <!-- Selection Task -->
+    <c-selectiontaskview params="context: context"></c-selectiontaskview>
+<!-- /ko -->
+<!-- ko if: active() === 'usertaskscontainer' -->
+    <!-- User Tasks -->
+    <c-usertaskscontainer params="context: context"></c-usertaskscontainer>
+<!-- /ko -->
+<!-- ko if: active() === 'annotationtaskview' -->
+    <!-- Annotation Task -->
+    <c-annotationtaskview params="context: context"></c-annotationtaskview>
+<!-- /ko -->

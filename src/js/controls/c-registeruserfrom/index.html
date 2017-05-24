@@ -1,0 +1,39 @@
+<h3>Register Form</h3>
+<form>
+    <div class="form-group" data-bind="css: {'has-error': usernameError}">
+        <label for="registeruserfrom_field_4" data-bind="css: {active: username}, attr: {'data-error': usernameError}" class="control-label">Username</label>
+        <input id="registeruserfrom_field_4" data-bind="textinput: username" type="text" class="form-control validate" aria-describedby="registeruserfrom_field_4_error">
+        <span id="registeruserfrom_field_4_error" class="help-block" data-bind="text: usernameError"></span>
+    </div>
+     <div class="form-group" data-bind="css: {'has-error': fullnameError}">
+        <label for="registeruserfrom_field_1" data-bind="css: {active: fullname}, attr: {'data-error': fullnameError}" class="control-label">Fullname</label>
+        <input id="registeruserfrom_field_1" data-bind="textinput: fullname" type="text" class="form-control validate" aria-describedby="registeruserfrom_field_1_error">
+        <span id="registeruserfrom_field_1_error" class="help-block" data-bind="text: fullnameError"></span>
+    </div>
+    <div class="form-group" data-bind="css: {'has-error': passwordError}">
+        <label for="registeruserfrom_field_2" data-bind="css: {active: password}, attr: {'data-error': passwordError}" class="control-label">Password</label>
+        <input id="registeruserfrom_field_2" data-bind="textinput: password" type="password" class="form-control validate" aria-describedby="registeruserfrom_field_2_error">
+        <span id="registeruserfrom_field_2_error" class="help-block" data-bind="text: passwordError"></span>
+    </div>
+    <div class="form-group" data-bind="css: {'has-error': confirmError}">
+        <label for="registeruserfrom_field_0" data-bind="css: {active: confirm}, attr: {'data-error': confirmError}" class="control-label">ConfirmPassword</label>
+        <input id="registeruserfrom_field_0" data-bind="textinput: confirm" type="password" class="form-control validate" aria-describedby="registeruserfrom_field_0_error">
+        <span id="registeruserfrom_field_0_error" class="help-block" data-bind="text: confirmError"></span>
+    </div>
+     <div class="form-group" data-bind="css: {'has-error': errors()['TypeAccount']}">
+        <label for="registeruserfrom_field_3" data-bind="css: {active: fields()['TypeAccount']}, attr: {'data-error': errors()['TypeAccount']}" class="control-label">Manager</label>
+        <input id="registeruserfrom_field_3" data-bind="checked: master" type="checkbox" class="form-control validate" aria-describedby="registeruserfrom_field_3_error">
+        <span id="registeruserfrom_field_3_error" class="help-block" data-bind="text: errors()['TypeAccount']"></span>
+    </div>
+    
+</form>
+ <div class="form-group" data-bind="css: {'has-error': registerError">
+        <p id="registerError" style="color:red" class="help-block" data-bind="text: registerError"></p>
+    </div>
+    <div class="form-group" >
+        <p id="result" style="color:green" class="help-block" data-bind="text: result"></p>
+    </div>
+<div class="row">
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'registerbutton')">Register</a>
+</div>
+   

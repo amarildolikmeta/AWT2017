@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        </div>
+</div>
+<!-- ko if: active() === 'indexpage' -->
+    <!-- Index -->
+    <c-indexpage params="context: context"></c-indexpage>
+<!-- /ko -->
+<!-- ko if: active() === 'app' -->
+    <!-- App -->
+    <c-app params="context: context"></c-app>
+<!-- /ko -->

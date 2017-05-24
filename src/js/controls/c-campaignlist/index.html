@@ -1,0 +1,22 @@
+<h3>User Campaigns <span style="color:red" data-bind="text:loadError"></span></h3>
+<h5 data-bind="text:detailsError" style="color:red"></h5>
+<table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>Campaign Name</th>
+            <th>Execution state</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: items">
+        <tr data-bind="click: $parent.select">
+            <td data-bind="text: $data['name']" style="white-space: pre-wrap;"></td>
+            <td data-bind="text: $data['status']" style="white-space: pre-wrap;"></td>
+            <td>
+                <a class="waves-effect waves-light btn cyan" data-bind="click: $parent.trigger.bind($data, 'selectcampaigndetails'), clickBubble: false">Details</a>
+                <!--<a class="waves-effect waves-light btn cyan" data-bind="click: $parent.trigger.bind($data, 'changestatebutton'), clickBubble: false">Change State</a>-->
+            </td>
+        </tr>
+    </li>
+    </tbody>
+</table>
