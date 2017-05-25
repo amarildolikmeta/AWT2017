@@ -2,7 +2,7 @@
 "use strict";
 
 exports.createEvent = function () { // add "options" parameter if needed
-    return function (context) {
+    return function (context,data) {
         if (!context.vms['croudsourcecontainer']) {
             context.top.active('croudsourcecontainer');
             context.vms['croudsourcecontainer'].init({mask: 'croudsourceviewcontainer'});
@@ -18,6 +18,6 @@ exports.createEvent = function () { // add "options" parameter if needed
         if (!context.vms['selectiontaskview']) {
             context.vms['workerhomecontainerview'].active('selectiontaskview');
         }
-        context.vms['selectiontaskview'].init();
+        context.vms['selectiontaskview'].init({session:data["session"]});
     };
 };

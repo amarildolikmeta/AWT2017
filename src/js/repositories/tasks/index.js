@@ -58,6 +58,87 @@ Repository.prototype.getTasks = function (context) {
         });
     });
 };
+Repository.prototype.getTask = function (context,session) {
+    
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: context.repositories["server"]+session,
+            type: "GET",
+            contentType: "application/json",
+            dataType:"json",
+             headers: {
+            "Authorization": "APIToken "+context.repositories["token"]
+            },
+           error: function(err, textStatus, errorThrown) { 
+            if(err.status == 404 || errorThrown == 'Not Found') 
+            { 
+                var e=new Error(err);
+                e.textStatus=err.status;
+                reject(e);
+                
+             }
+             var error=new Error(err);
+            if(err.status)
+                error.status=err.status;
+            else if(err.responseJSON)
+                error.textStatus=JSON.stringify(err.responseJSON.error);
+            else if(err.responseText)
+                error.textStatus=err.responseText;
+            else if (err.message)
+                error.textStatus=err.message;
+            else
+                error.textStatus="Couldn't get new task";    
+            reject(error);
+            },
+        }).done(function (result,a,request) {
+            
+            resolve(result);
+        });
+    });
+};
+Repository.prototype.sendResult = function (context,session,accepted) {
+   
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: context.repositories["server"]+session,
+            type: "PUT",
+            contentType: "application/json",
+            dataType:"json",
+             headers: {
+            "Authorization": "APIToken "+context.repositories["token"]
+            },
+            data:JSON.stringify({
+                "accepted":accepted
+            }),
+            success: function (data) {
+            resolve("Done")
+            },
+           error: function(err, textStatus, errorThrown) { 
+            if(err.status == 404 || errorThrown == 'Not Found') 
+            { 
+                var e=new Error(err);
+                e.textStatus=err.status;
+                reject(e);
+                
+             }
+             var error=new Error(err);
+            if(err.status)
+                error.status=err.status;
+            else if(err.responseJSON)
+                error.textStatus=JSON.stringify(err.responseJSON.error);
+            else if(err.responseText)
+                error.textStatus=err.responseText;
+            else if (err.message)
+                error.textStatus=err.message;
+            else
+                error.textStatus="Error while sending the result";    
+            reject(error);
+            },
+        }).done(function (result,a,request) {
+            resolve("Done");
+        });
+    });
+};
 Repository.prototype.findById = function (id) {
     // TODO: implement the accessor to the datasource which returns a promise
     // TODO: remove this BEGIN
@@ -125,7 +206,7 @@ Repository.prototype.startSession = function (context,id,optional) {
             "Authorization": "APIToken "+context.repositories["token"]
             },
         }).done(function (result,a,request) {
-            alert("Session:"+result.session);
+            var session=result.session;
             $.ajax({
             url: context.repositories["server"] +result.session,
             type: "POST",
@@ -133,16 +214,16 @@ Repository.prototype.startSession = function (context,id,optional) {
              headers: {
             "Authorization": "APIToken "+context.repositories["token"]
             },
-        }).done(function (result,a,request) {
-            resolve("Started Session");
-        });
-    }).error(function (err) {
-            /*var error = new Error(errorThrown);
-            error.responseText =  $.parseJSON(jqXHR.responseText);
-            error.textStatus = textStatus;
-            error.jqXHR = jqXHR;
-            error.errors = jqXHR.responseJSON.errors;*/
-            var error=new Error(err);
+            error: function(err, textStatus, errorThrown) { 
+               
+            if(err.status == 404 || errorThrown == 'Not Found') 
+            { 
+                var e=new Error(err);
+                e.textStatus=err.status;
+                reject(e);
+                
+             }
+             var error=new Error(err);
             if(err.status)
                 error.status=err.status;
             else if(err.responseJSON)
@@ -152,9 +233,13 @@ Repository.prototype.startSession = function (context,id,optional) {
             else if (err.message)
                 error.textStatus=err.message;
             else
-                error.textStatus="Error while loading statistics";    
+                error.textStatus="Couln't start a new session";    
             reject(error);
+            },
+        }).done(function (result,a,request) {
+            resolve(session);
         });
+    });
     });
     else 
     {
@@ -166,8 +251,16 @@ Repository.prototype.startSession = function (context,id,optional) {
              headers: {
             "Authorization": "APIToken "+context.repositories["token"]
             },
+            error: function(jqXHR, textStatus, errorThrown) { 
+            if(jqXHR.status == 404 || errorThrown == 'Not Found') 
+            { 
+                var e=new Error(jqXHR);
+                e.textStatus=jqXHR.status;
+                resolve(e);
+             }
+            },
         }).done(function (result,a,request) {
-           resolve
+           resolve(id);
     }).error(function (err) {
             /*var error = new Error(errorThrown);
             error.responseText =  $.parseJSON(jqXHR.responseText);
@@ -182,7 +275,7 @@ Repository.prototype.startSession = function (context,id,optional) {
             else if (err.message)
                 error.textStatus=err.message;
             else
-                error.textStatus="Error while loading statistics";    
+                error.textStatus="Couln't start a new session";    
             reject(error);
         });
     });

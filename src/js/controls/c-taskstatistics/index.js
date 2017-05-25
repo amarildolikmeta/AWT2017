@@ -42,6 +42,8 @@ ViewModel.prototype._compute = function() {
     if(this.filters.id){
     this._computing = this._repository.getTaskStatistics(self.context,this.filters.id, this.fields).then(function (item) {
         self.output = item;
+        //if(item["accepted"])
+
         self.item(item);
         self.status('computed');
         self._computing = undefined;

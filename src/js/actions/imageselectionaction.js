@@ -10,7 +10,7 @@ function Action() { // add "options" parameters if needed
     this.collection = options.repositories.mail;
     */
 }
-Action.prototype.run = function (parameters, solve) { // add "onCancel" parameters if needed
+Action.prototype.run = function (context,parameters, solve) { // add "onCancel" parameters if needed
     // Parameters:
     // parameters['id']
     // parameters['selection']
@@ -22,21 +22,39 @@ Action.prototype.run = function (parameters, solve) { // add "onCancel" paramete
         .then(solve);
     */
     // THIS CAN BE REMOVED (BEGIN)
-    $.notify({message: 'Image Selection'}, {allow_dismiss: true, type: 'success'});
+    context.repositories["tasks"].sendResult(context,parameters.session,parameters.accepted).then(function(result){
+        $.notify({message: 'Selection Sent'}, {allow_dismiss: true, type: 'success'});
     solve({
         event: 'selectioncompletedevent', // event
         data: {
+            session:parameters.session
         }
     });
+    }).catch(function(e){
+        if(e.textStatus==404)
+        {
+            alert("No more images in campaign");
+            context.events['workertohome'](context);
+        }
+        else{
+        $.notify({message: 'Selection Sent'}, {allow_dismiss: true, type: 'success'});
+       solve({
+        event: 'selectioncompletedevent', // event
+        data: {
+            session:parameters.session
+        }});
+    }
+    });
+    
     // THIS CAN BE REMOVED (END)
 };
 
 exports.createAction = function (options) {
     var action = new Action(options);
-    return function (data) {
+    return function (context,data) {
         return new Promise(function (solve, reject, onCancel) {
             var parameters = (data && data.filters) || {};
-            action.run(parameters, solve, onCancel);
+            action.run(context,parameters, solve, onCancel);
         });
     };
 };

@@ -4,10 +4,8 @@
 exports.createEvent = function () { // add "options" parameter if needed
     return function (context, data) {
         data = data || {};
-        var packet = {
-            'id' : data['id']
-        };
-        var promise = context.actions['imageselectionaction']({filters: packet});
+        var packet = data;
+        var promise = context.actions['imageselectionaction'](context,{filters: packet});
         context.runningActionsByContainer['selectiontaskview'].push(promise);
         promise.then(function (result) {
             context.runningActionsByContainer['selectiontaskview'].splice(

@@ -30,7 +30,7 @@ function ViewModel(params) {
 
     self.trigger = function (id) {
         self.taskError(undefined);
-        if(id="executetaskbutton")
+        if(id=="executetaskbutton")
             self.context.events[id](self.taskError,self.context, this);
         else
             self.context.events[id](self.context, this);

@@ -6,13 +6,23 @@ var ko = require('knockout'),
 
 function ViewModel(params) {
     var self = this;
-    self._repository = params.context.repositories['ImageSelection'];
+    self._repository = params.context.repositories["tasks"];
     self.context = params.context;
     self.status = ko.observable('');
     self.item = ko.observable(undefined);
-
+    self.session=ko.observable();
+    self.Error=ko.observable();
     self.trigger = function (id) {
-        self.context.events[id](self.context, self.item());
+        var accepted=false;
+        if(id=="acceptimagebutton")
+            accepted=true;
+        if(!self.session())
+            return;
+        var packet={
+            "session":self.session(),
+            "accepted":accepted,
+        }
+        self.context.events["acceptimagebutton"](self.context,packet);
     };
 }
 
@@ -20,7 +30,8 @@ ViewModel.prototype.id = 'imageselectiontask';
 
 ViewModel.prototype.fields = {
     id: 1
-    ,'selection': 1
+    ,'type': 1
+    ,"image":1
 };
 
 ViewModel.prototype.waitForStatusChange = function () {
@@ -35,12 +46,22 @@ ViewModel.prototype._compute = function() {
         this._computing.cancel();
     }
     var self = this;
-    this._computing = this._repository.findById(this.filters.id, this.fields).then(function (item) {
+    if(this.session()){
+    this._computing = this._repository.getTask(this.context,this.session()).then(function (item) {
+        
+        item["image"]=self.context.repositories["server"]+item["image"];
         self.output = item;
         self.item(item);
         self.status('computed');
         self._computing = undefined;
+    }).catch(function (e){
+        alert(JSON.stringify(e));
+        if(e.textStatus==404)
+            self.context.events['workertohome'](self.context);
+        else
+            self.Error(e.textStatus);
     });
+    }
 };
 
 
@@ -48,6 +69,7 @@ ViewModel.prototype.init = function (options) {
     options = options || {};
     this.output = undefined;
     this.filters = options.input || {};
+    this.session(options.session);
     this.status('ready');
     var self = this;
     this._initializing = new Promise(function (resolve) {

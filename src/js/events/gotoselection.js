@@ -18,7 +18,7 @@ exports.createEvent = function () { // add "options" parameter if needed
         if (!context.vms['selectiontaskview']) {
             context.vms['workerhomecontainerview'].active('selectiontaskview');
         }
-        alert(JSON.stringify(data));
-        context.vms['selectiontaskview'].init();
+        
+        context.vms['selectiontaskview'].init({session:data["session"]});
     };
 };

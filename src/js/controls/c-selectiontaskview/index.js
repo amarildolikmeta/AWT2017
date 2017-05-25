@@ -10,9 +10,7 @@ function ViewModel(params) {
     self.init = function (options) {
         options = options || {};
         self.children.forEach(function (child){
-            if (child === options.mask) {
-                return;
-            }
+            
             self.context.vms[child].init(options);
         });
     };
