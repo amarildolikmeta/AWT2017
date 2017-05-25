@@ -1,6 +1,8 @@
-<h3>Annotation</h3>
-<dl class="dl-horizontal" data-bind="if: item">
-</dl>
+<h3>Annotate the image  <span style= "color:red" data-bind="text:Error" ></span></h3>
+<div class="dl-horizontal">
+        <line-drawer params="context:context,src: image, pen: size, line: line"></line-drawer>
+</div>
 <div class="row">
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'sendannotationbutton')">event</a>
+    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'sendannotationbutton')">Send</a>
+    <a class="col-xs-2 btn btn-primary" data-bind="click: clear">Clear</a>
 </div>

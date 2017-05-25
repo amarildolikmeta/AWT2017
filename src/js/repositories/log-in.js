@@ -10,6 +10,7 @@ var $ = require('jquery'),
     Promise = require('bluebird');
 Repository.prototype.log_in = function (context,packet) {
     var self = this;
+    
     return new Promise(function (resolve, reject) {
         $.ajax({
             url: context.repositories["server"]+"/api/auth",

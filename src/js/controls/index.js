@@ -5,6 +5,7 @@ var ko = require('knockout');
 
 exports.register = function () {
     require('./main-application').register();
+    require('./line-drawer').register();
     require('./c-croudsourcecontainer').register();
     require('./c-croudsourceviewcontainer').register();
     require('./c-indexpage').register();

@@ -96,8 +96,15 @@ Repository.prototype.getTask = function (context,session) {
         });
     });
 };
-Repository.prototype.sendResult = function (context,session,accepted) {
-   
+Repository.prototype.sendResult = function (context,session,accepted,optional) {
+   var packet={
+       "accepted":accepted
+   };
+   if(optional)
+        packet={
+            "skyline":accepted
+        };
+    
     return new Promise(function (resolve, reject) {
         $.ajax({
             url: context.repositories["server"]+session,
@@ -107,9 +114,7 @@ Repository.prototype.sendResult = function (context,session,accepted) {
              headers: {
             "Authorization": "APIToken "+context.repositories["token"]
             },
-            data:JSON.stringify({
-                "accepted":accepted
-            }),
+            data:JSON.stringify(packet),
             success: function (data) {
             resolve("Done")
             },
@@ -237,7 +242,11 @@ Repository.prototype.startSession = function (context,id,optional) {
             reject(error);
             },
         }).done(function (result,a,request) {
-            resolve(session);
+            var res={
+                session:session,
+                task:result
+            }
+            resolve(res);
         });
     });
     });

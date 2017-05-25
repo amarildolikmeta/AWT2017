@@ -30,7 +30,8 @@ Action.prototype.run = function (error,context,parameters, solve) { // add "onCa
         event: e, // Image Selection
         // event: 'gotoannotation', // Image Annotation fuck
         data: {
-            "session":result,
+            "session":result.session,
+            "task":result.task,
         }
     });
     }).catch(function(e){

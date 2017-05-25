@@ -12,6 +12,7 @@ function ViewModel(params) {
     self.item = ko.observable(undefined);
     self.session=ko.observable();
     self.Error=ko.observable();
+    self.load=true;
     self.trigger = function (id) {
         var accepted=false;
         if(id=="acceptimagebutton")
@@ -46,7 +47,7 @@ ViewModel.prototype._compute = function() {
         this._computing.cancel();
     }
     var self = this;
-    if(this.session()){
+    if(self.load){
     this._computing = this._repository.getTask(this.context,this.session()).then(function (item) {
         
         item["image"]=self.context.repositories["server"]+item["image"];
@@ -62,6 +63,9 @@ ViewModel.prototype._compute = function() {
             self.Error(e.textStatus);
     });
     }
+    else{
+        self.load=true;
+    }
 };
 
 
@@ -72,6 +76,7 @@ ViewModel.prototype.init = function (options) {
     this.session(options.session);
     this.status('ready');
     var self = this;
+    
     this._initializing = new Promise(function (resolve) {
         setTimeout(function () {
             self._compute();

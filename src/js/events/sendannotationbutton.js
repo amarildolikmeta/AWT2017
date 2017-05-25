@@ -2,8 +2,12 @@
 "use strict";
 
 exports.createEvent = function () { // add "options" parameter if needed
-    return function (context) {
-        var promise = context.actions['sendannotationaction']();
+    return function (context,data) {
+        var packet={
+            "line":data.line
+            ,"session":data.session
+        };
+        var promise = context.actions['sendannotationaction'](context,{filters:packet});
         context.runningActionsByContainer['annotationtaskview'].push(promise);
         promise.then(function (result) {
             context.runningActionsByContainer['annotationtaskview'].splice(
