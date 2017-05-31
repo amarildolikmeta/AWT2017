@@ -6,7 +6,7 @@ var ko = require('knockout');
 function ViewModel(params) {
     var self = this;
     self.context = params.context;
-
+    
     self.init = function (options) {
         options = options || {};
         self.children.forEach(function (child){
@@ -18,7 +18,7 @@ function ViewModel(params) {
     };
 
     self.trigger = function (id) {
-        self.context.events[id](self.context);
+       
     };
 }
 

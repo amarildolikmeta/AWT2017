@@ -10,7 +10,7 @@ function Repository(options) {
     }
 
     // TODO: initialization
-
+    this.flag=false;
     // TODO: remove this BEGIN
     this.db = Promise.promisifyAll(new DataStore({
         filename: 'tasks',
@@ -20,6 +20,12 @@ function Repository(options) {
     // TODO: remove this END
     self=this;
 }
+Repository.prototype.getFlag=function(){
+        return this.flag;
+};
+Repository.prototype.setFlag=function(flag){
+        this.flag=flag;
+};
 Repository.prototype.getTasks = function (context) {
     
     return new Promise(function (resolve, reject) {
@@ -221,7 +227,7 @@ Repository.prototype.startSession = function (context,id,optional) {
             },
             error: function(err, textStatus, errorThrown) { 
                
-            if(err.status == 404 || errorThrown == 'Not Found') 
+            if(err.status == 404 || err.status == 412  || errorThrown == 'Not Found') 
             { 
                 var e=new Error(err);
                 e.textStatus=err.status;

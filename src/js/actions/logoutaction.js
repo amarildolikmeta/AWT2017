@@ -20,7 +20,7 @@ Action.prototype.run = function (parameters, solve) { // add "onCancel" paramete
         .then(solve);
     */
     // THIS CAN BE REMOVED (BEGIN)
-    $.notify({message: 'Log Out'}, {allow_dismiss: true, type: 'success'});
+    
     solve({
         event: 'loggedout', // loggedOut
         data: {

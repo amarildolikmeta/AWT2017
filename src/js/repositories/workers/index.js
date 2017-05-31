@@ -3,7 +3,7 @@
 
 var Promise = require('bluebird'),
     DataStore = require('nedb');
-var self;
+var self,count;
 function Repository(options) {
     if (!(this instanceof Repository)) {
         return new Repository(options);
@@ -140,6 +140,7 @@ Repository.prototype.getWorkers = function (context) {
             }
                 
         }
+            self.workerList=workers;
             self.db.insert(workers);
             if(result.workers.length==0)
                 resolve("No workers in the campaign");
@@ -163,6 +164,14 @@ Repository.prototype.getWorkers = function (context) {
             reject(error);
         });
     });
+};
+
+Repository.prototype.setWorkers = function (workerList) {
+    this.db = Promise.promisifyAll(new DataStore({
+            filename: 'workers',
+            inMemoryOnly: true
+            }));
+    self.db.insert(workerList);
 };
 Repository.prototype.findById = function (id) {
     // TODO: implement the accessor to the datasource which returns a promise

@@ -1,14 +1,15 @@
 <h3>Image Statistics</h3>
+<p style="color:red" data-bind="text:Error"></p>
 <div class="dl-horizontal" data-bind="if: item">
-        <p><img data-bind="attr: {src:img}"/></p>
+        <p><img  style="max-width:400px;max-height:400px" data-bind="attr: {src:img}"/></p>
 
         </br>
-        <p>NUMBER OF NEGATIVE SELECTIONS: <span data-bind="text: item()['selection']['NUMBER OF NEGATIVE SELECTIONS']"></span></p>
+        <p>NUMBER OF POSITIVE SELECTIONS: <span data-bind="text: item()['selection']['accepted']"></span></p>
         
-        <p>NUMBER OF POSITIVE SELECTIONS: <span data-bind="text: item()['selection']['NUMBER OF POSITIVE SELECTIONS']"></span></p>
+        <p>NUMBER OF NEGATIVE SELECTIONS: <span data-bind="text: item()['selection']['rejected']"></span></p>
         
-        
-</div>
 <div class="row">
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'checkannotationsbutton')">Check Annotation</a>
+    <button id="annotationButton" class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'checkannotationsbutton')">Check Annotation</button>
+</div>  
 </div>
+

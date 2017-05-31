@@ -6,7 +6,7 @@ var ko = require('knockout'),
 
 function ViewModel(params) {
     var self = this;
-    self._repository = params.context.repositories['user'];
+    self._repository = params.context.repositories['userAPI'];
     self.context = params.context;
     self.status = ko.observable('');
     self.item = ko.observable(undefined);
@@ -14,18 +14,7 @@ function ViewModel(params) {
     self.username=ko.observable("");
     self.fullname=ko.observable("");
     self.type=ko.observable("");
-    self.context.repositories["userAPI"].me(self.context).then(function (res) {
-                self.fullname(res.fullname);
-                self.username(res.username);
-                self.type(res.type);
-                self.context.repositories["type"]=res.type;
-                }).catch(function (e) {
-            if (e.textStatus) {
-              self.loadError(e.textStatus);
-            } else {
-                self.loadError(e.message);
-            }
-        });
+    
     self.trigger = function (id) {
         var packet={
             'Full Name':self.fullname()
@@ -49,18 +38,37 @@ ViewModel.prototype.waitForStatusChange = function () {
 };
 
 
-/*ViewModel.prototype._compute = function() {
+ViewModel.prototype._compute = function() {
     if (this._computing) {
         this._computing.cancel();
     }
-    var self = this;
-    this._computing = this._repository.findById(this.filters.id, this.fields).then(function (item) {
-        self.output = item;
-        self.item(item);
+    var self=this;
+    if(!self._repository.getFlag()){
+        self.context.repositories["userAPI"].me(self.context).then(function (res) {
+                self._repository.setFlag(true);
+                self.fullname(res.fullname);
+                self.username(res.username);
+                self.type(res.type);
+                self.context.repositories["type"]=res.type;
+                return
+                }).catch(function (e) {
+            if (e.textStatus) {
+              self.loadError(e.textStatus);
+            } else {
+                self.loadError(e.message);
+            }
+        });
+    }
+    
+    var res= this._repository.getDetails();
+        self.output = res;
+        self.fullname(res.fullname);
+        self.username(res.username);
+        self.type(res.type);
         self.status('computed');
         self._computing = undefined;
-    });
-};*/
+    
+};
 
 
 ViewModel.prototype.init = function (options) {
@@ -71,7 +79,7 @@ ViewModel.prototype.init = function (options) {
     var self = this;
     this._initializing = new Promise(function (resolve) {
         setTimeout(function () {
-           // self._compute();
+           self._compute();
             resolve();
             self._initializing = undefined;
         }, 1);

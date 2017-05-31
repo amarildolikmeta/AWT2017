@@ -2,7 +2,7 @@
 "use strict";
 
 exports.createEvent = function () { // add "options" parameter if needed
-    return function (context) {
+    return function (context,annotations,canonical) {
         if (!context.vms['croudsourcecontainer']) {
             context.top.active('croudsourcecontainer');
             context.vms['croudsourcecontainer'].init({mask: 'croudsourceviewcontainer'});
@@ -22,6 +22,6 @@ exports.createEvent = function () { // add "options" parameter if needed
         if (!context.vms['annotationscontainer']) {
             context.vms['runningcampaignview'].active('annotationscontainer');
         }
-        context.vms['annotationscontainer'].init();
+        context.vms['annotationscontainer'].init({annotation:annotations,canonical:canonical});
     };
 };

@@ -1,5 +1,7 @@
 <div class="container">
     <div class="row">
+         <a class="col-xs-2 btn btn-primary" style="width:11,5%;margin-left:3%" data-bind="click: trigger.bind($data, 'Publish Campaign')">Terminate</a>
+        <span data-bind="text:terminateError" style="color:red"></span>
         </div>
 </div>
 <!-- ko if: active() === 'campaignlistcontainerrunning' -->

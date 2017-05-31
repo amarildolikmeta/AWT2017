@@ -10,6 +10,7 @@ var $ = require('jquery'),
     Promise = require('bluebird');
 Repository.prototype.create = function (context,packet,method) {
     var self = this;
+     context.repositories["campaigns"].setFlag(false);
     var url="";
         if(method==="POST")
             url="/api/campaign";

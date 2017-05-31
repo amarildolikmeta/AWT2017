@@ -10,15 +10,7 @@ function ViewModel(params) {
     self.context = params.context;
     self.loadError=ko.observable();
     self.taskError=ko.observable();
-    self._repository.getTasks(self.context).then(function (result) {
-               self._compute();
-        }).catch(function (e) {
-            if (e.textStatus) {
-              self.loadError(e.textStatus);
-            } else {
-                self.loadError(e.message);
-            }
-        });
+   
     self.status = ko.observable('');
     self.selected = ko.observable(undefined);
     self.items = ko.observableArray([]);
@@ -59,6 +51,18 @@ ViewModel.prototype._compute = function() {
         this._computing.cancel();
     }
     var self = this;
+    if(!self._repository.getFlag()){
+     self._repository.getTasks(self.context).then(function (result) {
+               self._repository.setFlag(true)
+               self._compute();
+               return;
+        }).catch(function (e) {
+            if (e.textStatus) {
+              self.loadError(e.textStatus);
+            } else {
+                self.loadError(e.message);
+            }
+        });}
     if(self.filters.type==="both")
         self.filters={};
     this._computing = this._repository.find(this.filters, this.fields).then(function (items) {

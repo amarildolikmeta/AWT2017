@@ -28,7 +28,7 @@ Action.prototype.run = function (error,context,parameters, solve) { // add "onCa
     else
         method="POST";
         context.repositories["workers"].setTask(context,method,"annotation",parameters["id"]).then(function (result) {
-               $.notify({message: 'Done'}, {allow_dismiss: true, type: 'success'});
+               
                 solve({
                     event: 'selectionresultevent', // Selection Result
                     data: {

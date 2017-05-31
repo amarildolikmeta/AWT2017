@@ -22,6 +22,8 @@ Repository.prototype.log_in = function (context,packet) {
             },
             data:JSON.stringify(packet),
         }).done(function (result) {
+            context.repositories["tasks"].setFlag(false);
+            context.repositories["userAPI"].setFlag(false);
             resolve(result.token);
         }).error(function (err) {
             /*var error = new Error(errorThrown);

@@ -1,16 +1,26 @@
 <h3>User Details</h3>
-<dl class="dl-horizontal" >
-        <dt>Full Name</dt>
-        <dd data-bind="text: fullname"></dd>
-        <dt>Username</dt>
-        <dd data-bind="text: username"></dd>
-        <dt>Type of Account</dt>
-        <dd data-bind="text: type"></dd>
-</dl>
+<table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Type Account</th>
+        </tr>
+    </thead>
+    <tbody data-bind="if: fullname">
+        <tr >
+            <td data-bind="text: fullname" style="white-space: pre-wrap;"></td>
+            <td data-bind="text: username" style="white-space: pre-wrap;"></td>
+            <td data-bind="text: type" style="white-space: pre-wrap;"></td>
+        </tr>
+    </li>
+    </tbody>
+</table>
+
 <div class="form-group" data-bind="css: {'has-error': loadError">
         <p id="loadError" style="color:red" class="help-block" data-bind="text: loadError"></p>
     </div>
 <div class="row">
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'changenameevent')">Change Name</a>
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'changepasswordevent')">Change Password</a>
+    <a class="col-xs-2 btn btn-primary" style="width:12%" data-bind="click: trigger.bind($data, 'changenameevent')">Change Name</a>
+    <a class="col-xs-2 btn btn-primary" style="width:12%; margin-left:5%" data-bind="click: trigger.bind($data, 'changepasswordevent')">Change Password</a>
 </div>

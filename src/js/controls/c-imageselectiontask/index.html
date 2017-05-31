@@ -1,8 +1,11 @@
 <h3>Select The Image  <span style= "color:red" data-bind="text:Error" ></span></h3>
 <div class="dl-horizontal" data-bind="if: item">
-        <img data-bind="attr:{src:item()['image']}"/>
+        <img style="display:block;margin:auto;max-width:400px;max-width:400px;" data-bind="attr:{src:item()['image']}"/>
 </div>
-<div class="row">
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'acceptimagebutton')">Accept</a>
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'rejectimagebutton')">Reject</a>
+</br>
+<div  >
+    <div style=" margin: 0 auto;">
+    <a class="col-xs-2 btn btn-primary" style="margin-left:35%;width:10%" data-bind="click: trigger.bind($data, 'acceptimagebutton')">Accept</a>
+    <a class="col-xs-2 btn btn-primary" style="width:10%;margin-left:5%" data-bind="click: trigger.bind($data, 'rejectimagebutton')">Reject</a>
+    </div>
 </div>

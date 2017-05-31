@@ -8,6 +8,7 @@ exports.createEvent = function () { // add "options" parameter if needed
             'url' : data['url']
             ,'status' : data['status']
         };
+        
         var promise = context.actions['getcampaigndetailsaction']({filters: packet});
         context.runningActionsByContainer['campaignlistcontainer'].push(promise);
         promise.then(function (result) {

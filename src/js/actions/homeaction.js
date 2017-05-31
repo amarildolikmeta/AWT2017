@@ -28,7 +28,7 @@ Action.prototype.run = function (params, solve) { // add "onCancel" parameters i
         e="managettohome"
     else
         e="workertohome"
-    $.notify({message: 'Home'}, {allow_dismiss: true, type: 'success'});
+   
     solve({
         event: e, // ManagerResult
         // event: 'workertohome', // Worker Result

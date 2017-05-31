@@ -20,6 +20,8 @@ Repository.prototype.modify = function (context,packet) {
             },
             data:JSON.stringify(packet),
         }).done(function () {
+            if(packet.fullname)
+                context.repositories["userAPI"].setDetails({fullname:packet.fullname});
             resolve("Modified");
         }).error(function (err) {
             /*var error = new Error(errorThrown);

@@ -11,12 +11,15 @@ function ViewModel(params) {
     self.status = ko.observable('');
     self.selected = ko.observable(undefined);
     self.items = ko.observableArray([]);
-
+    self.line=ko.observable();
+    self.size=ko.observable();
+    self.image=ko.observable();
     self.select = function() {
         self.selected(this.id);
         self.output = this;
+        self.context.vms["line-drawer"].showAnnotation(this.annotation);
     };
-
+    self.annotations={};
     self.trigger = function (id) {
         self.context.events[id](self.context, this);
     };
@@ -25,10 +28,7 @@ function ViewModel(params) {
 ViewModel.prototype.id = 'annotationslist';
 
 ViewModel.prototype.fields = {
-    id: 1
-    ,'annotation': 1
-    ,'id': 1
-    ,'other annotation': 1
+    'annotation': 1
 };
 
 ViewModel.prototype.waitForStatusChange = function () {
@@ -42,7 +42,15 @@ ViewModel.prototype._compute = function() {
         this._computing.cancel();
     }
     var self = this;
-    this._computing = this._repository.find(this.filters, this.fields).then(function (items) {
+    self.context.vms["line-drawer"].disable();
+    
+   var items=[];
+   for(var i=0;i<self.annotations.length;i++)
+        {
+            items[i]={};
+            items[i].annotation=self.annotations[i];
+            items[i].id="Annotation "+(i+1);
+        }
         self.selected(undefined);
         self.items(items);
         if (items.length) {
@@ -51,14 +59,24 @@ ViewModel.prototype._compute = function() {
         }
         self.status('computed');
         self._computing = undefined;
-    });
+    
 };
 
 
 ViewModel.prototype.init = function (options) {
     options = options || {};
+    var self=this;
     this.output = undefined;
     this.filters = options.input || {};
+    if(options.annotation)
+    {
+        self.annotations=options.annotations;
+        self.image(options.canonical);
+    }
+    else
+    {
+        self.context.events["backfromannotationevent"](self.context);
+    }
     this.status('ready');
     var self = this;
     this._initializing = new Promise(function (resolve) {

@@ -9,6 +9,7 @@ function ViewModel(params) {
     self._repository = params.context.repositories['campaigns'];
     self.context = params.context;
     self.loadError=ko.observable();
+    if(!self._repository.getFlag()){
     self._repository.getCampaigns(self.context).then(function (result) {
                self._compute();
         }).catch(function (e) {
@@ -21,7 +22,7 @@ function ViewModel(params) {
     self.select = function() {
         self.selected(this.id);
         self.output = this;
-    };
+    };}
     self.status = ko.observable('');
     self.selected = ko.observable(undefined);
     self.items = ko.observableArray([]);
@@ -32,7 +33,8 @@ function ViewModel(params) {
         self.context.repositories["currentCampaign"].setURL(this.id);
         self.context.repositories["getCampaignDetails"].getCampaignDetails(self.context
                   ).then(function (result) {
-            self.context.repositories["currentCampaign"].setDetails(result);
+           
+            self.context.repositories["currentCampaign"].setDetails(result,self.context);
             self.context.events[id](self.context, data);
         }).catch(function (e) {
             if (e.textStatus) {
@@ -68,6 +70,8 @@ ViewModel.prototype._compute = function() {
         this._computing.cancel();
     }
     var self = this;
+    if(this.filters.status=="All")
+        this.filters={};
     this._computing = this._repository.find(this.filters, this.fields).then(function (items) {
         self.selected(undefined);
         self.items(items);

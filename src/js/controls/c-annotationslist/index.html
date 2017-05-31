@@ -1,19 +1,14 @@
-<h3>annotations</h3>
+<h3>Annotations</h3>
 <table class="table table-hover table-condensed">
+    <line-drawer params="context:context,src: image, pen: size, line: line"></line-drawer>
     <thead>
         <tr>
-            <th>#</th>
-            <th>annotation</th>
-            <th>id</th>
-            <th>other annotation</th>
+            <th>Annotation</th>
         </tr>
     </thead>
     <tbody data-bind="foreach: items">
         <tr data-bind="click: $parent.select">
-            <td data-bind="text: id"></td>
-            <td data-bind="text: $data['annotation']" style="white-space: pre-wrap;"></td>
             <td data-bind="text: $data['id']" style="white-space: pre-wrap;"></td>
-            <td data-bind="text: $data['other annotation']" style="white-space: pre-wrap;"></td>
         </tr>
     </li>
     </tbody>

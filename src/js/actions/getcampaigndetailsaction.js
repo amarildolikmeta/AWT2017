@@ -22,12 +22,14 @@ Action.prototype.run = function (parameters, solve) { // add "onCancel" paramete
         .then(solve);
     */
     // THIS CAN BE REMOVED (BEGIN)
+    
     var e="unpublishedcampaignresult";
     if(parameters.status==="started")
         e="runningcampaign";
     else if(parameters.status==="ended")
         e='completedcampaignresult';
-    $.notify({message: 'Details Loaded'}, {allow_dismiss: true, type: 'success'});
+    
+    
     solve({
         event: e, // Unpublished Campaign
         // event: 'completedcampaignresult', // Completed Campaign Result

@@ -1,4 +1,4 @@
-<h3>Register Form</h3>
+<h3>Create a new account</h3>
 <form>
     <div class="form-group" data-bind="css: {'has-error': usernameError}">
         <label for="registeruserfrom_field_4" data-bind="css: {active: username}, attr: {'data-error': usernameError}" class="control-label">Username</label>
@@ -21,8 +21,8 @@
         <span id="registeruserfrom_field_0_error" class="help-block" data-bind="text: confirmError"></span>
     </div>
      <div class="form-group" data-bind="css: {'has-error': errors()['TypeAccount']}">
-        <label for="registeruserfrom_field_3" data-bind="css: {active: fields()['TypeAccount']}, attr: {'data-error': errors()['TypeAccount']}" class="control-label">Manager</label>
-        <input id="registeruserfrom_field_3" data-bind="checked: master" type="checkbox" class="form-control validate" aria-describedby="registeruserfrom_field_3_error">
+        <label for="registeruserfrom_field_3" data-bind="css: {active: fields()['TypeAccount']}, attr: {'data-error': errors()['TypeAccount']}" class="control-label">Check if Manager</label>
+        <input id="registeruserfrom_field_3" data-bind="checked: master" type="checkbox" class="" aria-describedby="registeruserfrom_field_3_error">
         <span id="registeruserfrom_field_3_error" class="help-block" data-bind="text: errors()['TypeAccount']"></span>
     </div>
     

@@ -1,3 +1,10 @@
-<h3>Campaign Details</h3>
+<h3>Campaign Details <span style="color:red" data-bind="text:loadError"></h3>
 <dl class="dl-horizontal" data-bind="if: item">
+         <p>NUMBER OF IMAGES IN CAMPAIGN: <span data-bind="text: item()['images']"></span></p>
+        
+        <p>NUMBER OF ACCEPTED IMAGES: <span data-bind="text: item()['accepted']"></span></p>
+         <p>NUMBER OF REJECTED IMAGES: <span data-bind="text: item()['rejected']"></span></p>
+        
+        <p>NUMBER OF ANNOTATIONS: <span data-bind="text: item()['annotation']"></span></p>
+        <p>AVERAGE NUMBER OF ANNOTATIONS PER IMAGE: <span data-bind="text: item()['annotation']/ item()['images']"></span></p>
 </dl>

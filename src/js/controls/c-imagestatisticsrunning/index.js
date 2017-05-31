@@ -11,17 +11,21 @@ function ViewModel(params) {
     self.status = ko.observable('');
     self.item = ko.observable(undefined);
     self.img=ko.observable();
+    self.Error=ko.observable();
     self.trigger = function (id) {
-        self.context.events[id](self.context, self.item());
+        self.context.events[id](self.context, self.item()["annotation"],self.filters.canonical);
     };
+    self.clear=function(){
+        self.item(undefined);
+    }
 }
 
 ViewModel.prototype.id = 'imagestatisticsrunning';
 
 ViewModel.prototype.fields = {
     id: 1
-    ,'NUMBER OF NEGATIVE SELECTIONS': 1
-    ,'NUMBER OF POSITIVE SELECTIONS': 1
+    ,'rejected': 1
+    ,'accepted': 1
     ,'canonical': 1
 };
 
@@ -39,12 +43,24 @@ ViewModel.prototype._compute = function() {
     var self = this;
     if(this.filters.id)
     {
+    self.Error(undefined);
+   
     this._computing = this._repository.getImageStatistics(this.context,this.filters.id).then(function (item) {
         self.output = item;
+       
         self.img(self.filters.canonical);
         self.item(item);
+      if(!item.annotation.length)
+            document.getElementById("annotationButton").disabled="true";
+        else
+            document.getElementById("annotationButton").disabled="false";
         self.status('computed');
         self._computing = undefined;
+    }).catch(function(e){
+        if(e.textStatus)
+            self.Error(e.textStatus);
+        else
+            self.Error("Couldn't load statistics");
     });}
 };
 

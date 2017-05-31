@@ -13,24 +13,42 @@ function ViewModel(params) {
     self.success=ko.observable();
     self.uploadError=ko.observable();
     self.image=ko.observable();
+    self.count=0;
+    self.input={};
     self.trigger = function (id) {
-        self.context.events[id](self.context, self.output);
+        self.count=0;
+        var input=document.getElementById("imageuploadform_field_0");
+        if(input.files.length==0)
+            {self.uploadError("No file chosen");
+            return;}
+         self.uploadImage(input);
+        //self.context.events[id](self.context, self.output);
     };
-    self.uploadImage=function(file)
+    self.uploadImage=function(inputs)
     {
-       self.success(undefined);
+       var input=inputs;
+       self.success("");
        self.uploadError(undefined);
+       var file=input.files[self.count];
+       self.count++;
        self.context.repositories["images"].upload(self.context,file).then(function (result) {
-               self.success("Image Uploaded. Upload another one");
+               self.success(" All Images until "+(self.count)+" Uploaded");
+               if(self.count ==input.files.length)
+                    {self.success("All Images  Uploaded");}
+               else
+                    self.uploadImage(input); 
         }).catch(function (e) {
+            var message="Failed to upload image "+self.count+".";
             if (e.textStatus) {
-              self.uploadError(e.textStatus);
+              self.uploadError(message+e.textStatus);
             } else {
-                self.uploadError(e.message);
+                self.uploadError(message+e.message);
             }
         });
     };
+
 }
+
 
 ViewModel.prototype.id = 'imageuploadform';
 

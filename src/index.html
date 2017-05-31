@@ -3,7 +3,36 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Brokeback Mountain</title>
     <!-- TODO: Remove to use a different UI framework BEGIN -->
+    <style>
+ line-drawer {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    line-height: 0;
+    user-select: none
+}
+
+line-drawer > img.background {
+    max-width: 100%;
+    min-width: 100%;
+}
+
+line-drawer > canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.top-button{
+  position:absolute
+  top:0;
+  width:15%;
+  
+}
+</style>
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
     <!-- TODO: Remove to use a different UI framework END -->
   </head>

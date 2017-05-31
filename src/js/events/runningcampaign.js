@@ -18,6 +18,7 @@ exports.createEvent = function () { // add "options" parameter if needed
         if (!context.vms['runningcampaigncontainer']) {
             context.vms['managerhomecontainer'].active('runningcampaigncontainer');
         }
+       
         context.vms['runningcampaigncontainer'].init();
     };
 };

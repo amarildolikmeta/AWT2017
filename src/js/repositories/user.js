@@ -4,8 +4,26 @@ function Repository(server) {
     if (!(this instanceof Repository)) {
         return new Repository(server);
     }
-   // this._server = "http://awt.ifmledit.org" || '';
+   this.flag=false;
+   this.user={};
 }
+Repository.prototype.getFlag=function()
+{
+    return this.flag;
+};
+Repository.prototype.setFlag=function(flag)
+{
+    this.flag=flag;
+};
+Repository.prototype.getDetails=function()
+{
+    return this.user;
+};
+Repository.prototype.setDetails=function(details)
+{
+    if(details.fullname)
+        this.user.fullname=details.fullname;
+};
 var $ = require('jquery'),
     Promise = require('bluebird');
 Repository.prototype.me = function (context) {
@@ -20,6 +38,7 @@ Repository.prototype.me = function (context) {
             "Authorization": "APIToken "+context.repositories["token"],
             },
         }).done(function (result) {
+            self.user=result;
             resolve(result);
         }).error(function (err) {
             /*var error = new Error(errorThrown);

@@ -6,11 +6,11 @@ var ko = require('knockout'),
 
 function ViewModel(params) {
     var self = this;
-    self._repository = params.context.repositories['completed'];
+    self._repository = params.context.repositories['currentCampaign'];
     self.context = params.context;
     self.status = ko.observable('');
     self.item = ko.observable(undefined);
-
+    self.loadError=ko.observable();
     self.trigger = function (id) {
         self.context.events[id](self.context, self.item());
     };
@@ -19,7 +19,10 @@ function ViewModel(params) {
 ViewModel.prototype.id = 'detailscompleted';
 
 ViewModel.prototype.fields = {
-    id: 1
+    "images":1,
+    "accepted":1,
+    "rejected":1,
+    "annotation":1
 };
 
 ViewModel.prototype.waitForStatusChange = function () {
@@ -34,12 +37,17 @@ ViewModel.prototype._compute = function() {
         this._computing.cancel();
     }
     var self = this;
-    this._computing = this._repository.findById(this.filters.id, this.fields).then(function (item) {
+    this._computing = this._repository.getCampaignStatistics(this.context).then(function (item) {
         self.output = item;
         self.item(item);
         self.status('computed');
         self._computing = undefined;
-    });
+    }).catch(function (e){
+        if(e.textStatus)
+            self.loadError(e.textStatus);
+        else
+            self.loadError("Failed to load statistics");
+    } );
 };
 
 

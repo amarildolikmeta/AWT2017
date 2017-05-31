@@ -25,7 +25,7 @@ Action.prototype.run = function (parameters, solve) { // add "onCancel" paramete
         .then(solve);
     */
     // THIS CAN BE REMOVED (BEGIN)
-    $.notify({message: 'Campaign Created'}, {allow_dismiss: true, type: 'success'});
+   
     solve({
         event: 'campaigncreatedlink', // event
         data: {

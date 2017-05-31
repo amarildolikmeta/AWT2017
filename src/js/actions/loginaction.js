@@ -22,7 +22,7 @@ Action.prototype.run = function (parameters, solve) { // add "onCancel" paramete
         .then(solve);
     */
     // THIS CAN BE REMOVED (BEGIN)
-    $.notify({message: 'Logged In'}, {allow_dismiss: true, type: 'success'});
+    
     solve({
         event: 'succesfullogin', // event
         // event: 'failedlogin', // Log In Failed

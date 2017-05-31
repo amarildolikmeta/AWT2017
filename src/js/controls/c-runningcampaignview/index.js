@@ -7,7 +7,7 @@ function ViewModel(params) {
     var self = this;
     self.context = params.context;
     self.active = ko.observable(undefined);
-
+    self.terminateError=ko.observable();
     self.init = function (options) {
         options = options || {};
         self.active(self.defaultChild);
@@ -21,7 +21,20 @@ function ViewModel(params) {
         self.context.vms[id].init();
     };
     self.trigger = function (id) {
-        self.context.events[id](self.context);
+         self.context.repositories["currentCampaign"].terminate(self.context).then(function(result)
+        {
+           self.context.events["managettohome"](self.context);
+        }).catch(function(e)
+        {
+            if (e.textStatus) {
+              self.terminateError(e.textStatus);
+            } else {
+                self.terminateError(e.message);
+            }
+        });
+    };
+    self.getImages=function(id){
+
     };
 }
 

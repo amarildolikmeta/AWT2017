@@ -21,7 +21,7 @@ Action.prototype.run = function (context,parameters, solve) { // add "onCancel" 
     */
     // THIS CAN BE REMOVED (BEGIN)
    context.repositories["tasks"].sendResult(context,parameters.session,parameters.line,"annotation").then(function(result){
-        $.notify({message: 'Annotation Sent'}, {allow_dismiss: true, type: 'success'});
+        
     solve({
         event: 'selectioncompletedevent', // event
         data: {

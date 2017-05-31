@@ -25,7 +25,7 @@ Action.prototype.run = function (error,context,parameters, solve) { // add "onCa
     if(parameters["type"]==="selection")
         e="gotoselection"
     context.repositories["tasks"].startSession(context,parameters["id"],"getSessionUrl").then(function(result){
-         $.notify({message: 'Work Session Started'}, {allow_dismiss: true, type: 'success'});
+         
     solve({
         event: e, // Image Selection
         // event: 'gotoannotation', // Image Annotation fuck
@@ -37,6 +37,8 @@ Action.prototype.run = function (error,context,parameters, solve) { // add "onCa
     }).catch(function(e){
         if(e.textStatus===404)
             error("No images available");
+        else if(e.textStatus==412)
+            error("Task is Terminated");
         else if (e.textStatus) {
               error(e.textStatus);
             } else {

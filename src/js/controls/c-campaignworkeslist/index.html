@@ -1,5 +1,10 @@
-<h3>Workers<span style="color:red" data-bind="text:loadError"></span></h3>
-<span style="color:red" data-bind="text:taskError"></span>
+<h3>Workers 
+    <a class=" btn btn-primary top-button" data-bind="click: removeAll, clickBubble: false"> Remove All </a>
+    <span style="color:green" data-bind="text:resultRemove"></span> 
+</h3>
+<p style="color:red" data-bind="text:loadError"></p> 
+<p style="color:red" data-bind="text:taskError"></p>
+
 <table class="table table-hover table-condensed">
     <thead>
         <tr>

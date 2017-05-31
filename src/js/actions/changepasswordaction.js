@@ -23,7 +23,7 @@ Action.prototype.run = function (parameters, solve) { // add "onCancel" paramete
         .then(solve);
     */
     // THIS CAN BE REMOVED (BEGIN)
-    $.notify({message: 'Password Changed'}, {allow_dismiss: true, type: 'success'});
+    
     solve({
         event: 'passwordactioncomplete', // event
         data: {
