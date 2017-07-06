@@ -76,7 +76,7 @@ Repository.prototype.getTask = function (context,session) {
             "Authorization": "APIToken "+context.repositories["token"]
             },
            error: function(err, textStatus, errorThrown) { 
-            if(err.status == 404 || errorThrown == 'Not Found') 
+            if(err.status == 404 || err.status == 410 || errorThrown == 'Not Found'|| errorThrown == 'Gone') 
             { 
                 var e=new Error(err);
                 e.textStatus=err.status;
@@ -125,7 +125,7 @@ Repository.prototype.sendResult = function (context,session,accepted,optional) {
             resolve("Done")
             },
            error: function(err, textStatus, errorThrown) { 
-            if(err.status == 404 || errorThrown == 'Not Found') 
+            if(err.status == 404 || err.status == 410 || errorThrown == 'Not Found'|| errorThrown == 'Gone') 
             { 
                 var e=new Error(err);
                 e.textStatus=err.status;

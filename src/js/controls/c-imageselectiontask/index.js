@@ -57,7 +57,7 @@ ViewModel.prototype._compute = function() {
         self._computing = undefined;
     }).catch(function (e){
         alert(JSON.stringify(e));
-        if(e.textStatus==404)
+        if(e.textStatus==404 || e.textStatus==410 )
             self.context.events['workertohome'](self.context);
         else
             self.Error(e.textStatus);

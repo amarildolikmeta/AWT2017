@@ -15,10 +15,15 @@ function ViewModel(params) {
     self.size=ko.observable();
     self.image=ko.observable();
     self.select = function() {
+        
         self.selected(this.id);
         self.output = this;
         self.context.vms["line-drawer"].showAnnotation(this.annotation);
+        self.context.vms["line-drawer"].showAnnotation(this.annotation);
     };
+    self.clear=function(){
+        self.context.vms["line-drawer"].clear();
+    }
     self.annotations={};
     self.trigger = function (id) {
         self.context.events[id](self.context, this);
@@ -70,7 +75,7 @@ ViewModel.prototype.init = function (options) {
     this.filters = options.input || {};
     if(options.annotation)
     {
-        self.annotations=options.annotations;
+        self.annotations=options.annotation;
         self.image(options.canonical);
     }
     else

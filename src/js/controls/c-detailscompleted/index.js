@@ -38,6 +38,10 @@ ViewModel.prototype._compute = function() {
     }
     var self = this;
     this._computing = this._repository.getCampaignStatistics(this.context).then(function (item) {
+        if(item.images==0)
+            item.avg=0;
+        else
+            item.avg=item.annotation/item.images;
         self.output = item;
         self.item(item);
         self.status('computed');

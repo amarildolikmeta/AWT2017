@@ -7,9 +7,11 @@
         </tr>
     </thead>
     <tbody data-bind="foreach: items">
-        <tr data-bind="click: $parent.select">
+        <tr style="cursor:pointer" data-bind="click: $parent.select">
             <td data-bind="text: $data['id']" style="white-space: pre-wrap;"></td>
         </tr>
     </li>
     </tbody>
 </table>
+<a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data,'backfromannotationevent')">Back</a>
+<a class="col-xs-2 btn btn-primary" style="margin-left:10%" data-bind="click: clear.bind('backfromannotationevent')">Clear</a>

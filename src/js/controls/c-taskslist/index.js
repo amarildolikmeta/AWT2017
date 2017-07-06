@@ -19,7 +19,8 @@ function ViewModel(params) {
         self.selected(this.id);
         self.output = this;
     };
-
+    self.message=ko.observable();
+    self.errorMessage=ko.observable();
     self.trigger = function (id) {
         self.taskError(undefined);
         if(id=="executetaskbutton")
@@ -27,7 +28,38 @@ function ViewModel(params) {
         else
             self.context.events[id](self.context, this);
     };
+    self.loadAvailable=function(count,items){
+        
+            
+        if(count==self)
+            {
+                self.message("Loading Available tasks");
+                count=0;
+                items=self.items();
+            }
+          
+             this._repository.getTaskStatistics(self.context,items[count].id).then(function (item) {
+             if(item.available==0){
+                items.splice(count,1);
+                count--;
+            }
+             if(count<items.length-1)
+             {
+                 count++;
+                 self.loadAvailable(count,items);
+             }
+             else{
+                 self.items(items);
+                 self.message("Loaded")
+             }
+    }).catch(function(e){
+            self.message(undefined);
+            self.errorMessage("Something went wrong. Reload the page");
+            console.log(e);
+    });
 }
+        }
+  
 
 ViewModel.prototype.id = 'taskslist';
 
@@ -52,8 +84,10 @@ ViewModel.prototype._compute = function() {
     }
     var self = this;
     if(!self._repository.getFlag()){
+       
      self._repository.getTasks(self.context).then(function (result) {
-               self._repository.setFlag(true)
+               self._repository.setFlag(true);
+               
                self._compute();
                return;
         }).catch(function (e) {
@@ -67,6 +101,7 @@ ViewModel.prototype._compute = function() {
         self.filters={};
     this._computing = this._repository.find(this.filters, this.fields).then(function (items) {
         self.selected(undefined);
+       
         self.items(items);
         if (items.length) {
             self.selected(items[0].id);

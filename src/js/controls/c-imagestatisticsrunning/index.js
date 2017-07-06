@@ -51,9 +51,15 @@ ViewModel.prototype._compute = function() {
         self.img(self.filters.canonical);
         self.item(item);
       if(!item.annotation.length)
-            document.getElementById("annotationButton").disabled="true";
+      {
+           
+            document.getElementById("annotationButton").disabled=true;
+      }
         else
-            document.getElementById("annotationButton").disabled="false";
+        {
+           
+            document.getElementById("annotationButton").disabled=false;
+        }
         self.status('computed');
         self._computing = undefined;
     }).catch(function(e){

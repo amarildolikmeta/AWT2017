@@ -1,5 +1,7 @@
 <h3>Task List<span style="color:red" data-bind="text:loadError"></span></h3>
-<p style="color:red" data-bind="text:taskError"></sp>
+<p style="color:red" data-bind="text:taskError"></p>
+<a class="col-xs-2 btn btn-primary" data-bind="click: loadAvailable">Available Tasks</a><span style="color:green" data-bind="text:message"></span>
+<p style="color:red" data-bind="text:errorMessage"></p>
 <table class="table table-hover table-condensed">
     <thead>
         <tr>

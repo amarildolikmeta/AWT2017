@@ -83,13 +83,15 @@ var canvas;
             self.line="";
         }
         self.showAnnotation=function(annotation){
+            
             var img = new window.Image();
             con.clearRect(0, 0, canvas.width, canvas.height);
+            img.src=annotation;
             con.drawImage(img,0,0);
             img.src=annotation;
         };
         self.disable=function(){
-           $(canvas).off(); // remove vent listeners     
+           $(canvas).off(); // remove event listeners     
         };
         self.naturalSize = ko.observable();
     }
